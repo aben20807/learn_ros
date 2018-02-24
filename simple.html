@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <script src="https://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-<script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+<script src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 
 <script>
   // Connecting to ROS
@@ -64,7 +64,9 @@
   });
 
   // And finally, publish.
-  cmdVel.publish(twist);
+  function PublishTwist() {
+    cmdVel.publish(twist);
+  }
 
   //Subscribing to a Topic
   //----------------------
@@ -171,6 +173,7 @@
     <li><tt>rosrun rospy_tutorials add_two_ints_server</tt></li>
     <li><tt>roslaunch rosbridge_server rosbridge_websocket.launch</tt></li>
   </ol>
+  <button onclick="PublishTwist()">按我publish</button>
   <div id="statusIndicator">
     <p id="connecting">
       Connecting to rosbridge...
