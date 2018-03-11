@@ -150,6 +150,6 @@ async function PublishTwist(clicked_id) {
         }
     });
     cmdVel.publish(twist);
-    await sleep(2000);
+    await sleep(100);
     cmdVel.publish(stop);
 }
