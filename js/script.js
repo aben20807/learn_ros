@@ -63,15 +63,15 @@ var speedBindings = new Map([['q', [1.1, 1.1]],
 var speed = 0.2;
 var turn = 1;
 
-var x = 0
-var th = 0
-var status = 0
-var count = 0
-var acc = 0.1
-var target_speed = 0
-var target_turn = 0
-var control_speed = 0
-var control_turn = 0
+var x = 0;
+var th = 0;
+var status = 0;
+var count = 0;
+var acc = 0.1;
+var target_speed = 0;
+var target_turn = 0;
+var control_speed = 0;
+var control_turn = 0;
 
 // Do function when clicking.
 function PublishTwist(clicked_id) {
@@ -81,15 +81,17 @@ function PublishTwist(clicked_id) {
         th = moveBindings.get(clicked_id)[1];
         count = 0;
     } else if (speedBindings.has(clicked_id)){
-        speed = speed * speedBindings.get(clicked_id)[0]
-        turn = turn * speedBindings.get(clicked_id)[1]
-        count = 0
-        status = (status + 1) % 15
+        speed = speed * speedBindings.get(clicked_id)[0];
+        turn = turn * speedBindings.get(clicked_id)[1];
+        count = 0;
+        status = (status + 1) % 15;
     } else if (clicked_id == "k"){
-        x = 0
-        th = 0
-        control_speed = 0
-        control_turn = 0
+        x = 0;
+        th = 0;
+        control_speed = 0;
+        control_turn = 0;
+        speed = 0.2;
+        turn = 1;
     } else {
         count = count + 1
         if (count > 4){
@@ -97,8 +99,8 @@ function PublishTwist(clicked_id) {
             th = 0;
         }
     }
-    target_speed = speed * x
-    target_turn = turn * th
+    target_speed = speed * x;
+    target_turn = turn * th;
 
     if (target_speed > control_speed){
         control_speed = Math.min(target_speed, control_speed + 0.02);
