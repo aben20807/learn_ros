@@ -73,8 +73,25 @@ var target_turn = 0;
 var control_speed = 0;
 var control_turn = 0;
 
+var stop = new ROSLIB.Message({
+    linear : {
+        x : 0,
+        y : 0,
+        z : 0
+    },
+    angular : {
+        x : 0,
+        y : 0,
+        z : 0
+    }
+});
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // Do function when clicking.
-function PublishTwist(clicked_id) {
+async function PublishTwist(clicked_id) {
 
     if (moveBindings.has(clicked_id)){
         x = moveBindings.get(clicked_id)[0];
@@ -133,4 +150,6 @@ function PublishTwist(clicked_id) {
         }
     });
     cmdVel.publish(twist);
+    await sleep(2000);
+    cmdVel.publish(stop);
 }
