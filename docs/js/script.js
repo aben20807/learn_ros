@@ -75,19 +75,6 @@ var control_speed = 0;
 var control_turn = 0;
 var intervalID;
 
-var stop = new ROSLIB.Message({
-    linear : {
-        x : 0,
-        y : 0,
-        z : 0
-    },
-    angular : {
-        x : 0,
-        y : 0,
-        z : 0
-    }
-});
-
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -157,16 +144,27 @@ function PublishTwist(clicked_id) {
         }
     });
     cmdVel.publish(twist);
-    // await sleep(100);
 }
 
 function MouseUp(){
-    // alert('Mouse up event occurred.');
+
     clearInterval(intervalID);
     x = 0; th = 0;
     control_speed = 0;
     control_turn = 0;
     speed = 0.2;
     turn = 1;
+    var stop = new ROSLIB.Message({
+        linear : {
+            x : 0,
+            y : 0,
+            z : 0
+        },
+        angular : {
+            x : 0,
+            y : 0,
+            z : 0
+        }
+    });
     cmdVel.publish(stop);
 }
