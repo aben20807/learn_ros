@@ -41,6 +41,19 @@ var cmdVel = new ROSLIB.Topic({
     messageType : 'geometry_msgs/Twist'
 });
 
+var listener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/listener',
+    messageType : 'std_msgs/String'
+});
+
+listener.subscribe(function(message) {
+    console.log('Received message on ' + listener.name + ': ' + message.data);
+    document.getElementById('receiveLabel').innerHTML = message.data;
+    // If desired, we can unsubscribe from the topic as well.
+    // listener.unsubscribe();
+});
+
 // Key binding.
 var moveBindings = new Map([['u', [1, 1]],
     ['i', [1, 0]],
