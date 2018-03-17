@@ -66,8 +66,6 @@ var turn = 1;
 
 var x = 0;
 var th = 0;
-var status = 0;
-var count = 0;
 var acc = 0.1;
 var target_speed = 0;
 var target_turn = 0;
@@ -90,25 +88,19 @@ function PublishTwist(clicked_id) {
     if (moveBindings.has(clicked_id)){
         x = moveBindings.get(clicked_id)[0];
         th = moveBindings.get(clicked_id)[1];
-        count = 0;
     } else if (speedBindings.has(clicked_id)){
         speed = speed * speedBindings.get(clicked_id)[0];
         turn = turn * speedBindings.get(clicked_id)[1];
-        count = 0;
-        status = (status + 1) % 15;
     } else if (clicked_id == "k"){
         x = 0;
         th = 0;
         control_speed = 0;
         control_turn = 0;
+        target_speed = 0;
+        target_turn = 0;
         speed = 0.2;
         turn = 1;
     } else {
-        count = count + 1
-        if (count > 4){
-            x = 0;
-            th = 0;
-        }
     }
     target_speed = speed * x;
     target_turn = turn * th;
@@ -152,8 +144,6 @@ function MouseUp(){
     x = 0; th = 0;
     control_speed = 0;
     control_turn = 0;
-    speed = 0.2;
-    turn = 1;
     var stop = new ROSLIB.Message({
         linear : {
             x : 0,
