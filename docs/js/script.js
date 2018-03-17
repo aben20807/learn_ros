@@ -28,8 +28,14 @@ ros.on('close', function() {
 });
 
 // Create a connection to the rosbridge WebSocket server.
-ros.connect('ws://localhost:9090');
-// ros.connect('ws://192.168.56.101:9090');
+var ip;
+function onload() {
+    ip = document.getElementById('ip');
+}
+function connect(){
+    let ip_s = 'ws://' + ip.value + ':9090';
+    ros.connect(ip_s);
+}
 
 // Publishing a Topic
 // ------------------
