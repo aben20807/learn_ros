@@ -11,37 +11,37 @@
 <body>
   <h1>roslib demo</h1>
   <ol>
+    <li><tt>roslaunch rosbridge_server rosbridge_websocket.launch</tt></li>
     <li><tt>rostopic pub /listener std_msgs/String "Hello, World"</tt></li>
     <li><tt>rostopic echo /cmd_vel</tt></li>
-    <li><tt>roslaunch rosbridge_server rosbridge_websocket.launch</tt></li>
   </ol>
   <h2>Move</h2>
   <div class="btn-group">
-    <button id="u" onclick="PublishTwist(this.id)">u</button>
-    <button id="i" onclick="PublishTwist(this.id)">i</button>
-    <button id="o" onclick="PublishTwist(this.id)">o</button>
+    <button id="u" onmousedown="PublishTwist(this.id)" onmouseup="MouseUp()">u</button>
+    <button id="i" onmousedown="MouseDown(this.id)" onmouseup="MouseUp()">i</button>
+    <button id="o" onmousedown="PublishTwist(this.id)" onmouseup="MouseUp()">o</button>
   </div>
   <div class="btn-group">
-    <button id="j" onclick="PublishTwist(this.id)">j</button>
-    <button id="k" onclick="PublishTwist(this.id)">k</button>
-    <button id="l" onclick="PublishTwist(this.id)">l</button>
+    <button id="j" onmousedown="PublishTwist(this.id)" onmouseup="MouseUp()">j</button>
+    <button id="k" onmousedown="PublishTwist(this.id)" onmouseup="MouseUp()">k</button>
+    <button id="l" onmousedown="PublishTwist(this.id)" onmouseup="MouseUp()">l</button>
   </div>
   <div class="btn-group">
-    <button id="m" onclick="PublishTwist(this.id)">m</button>
-    <button id="," onclick="PublishTwist(this.id)">,</button>
-    <button id="." onclick="PublishTwist(this.id)">.</button>
+    <button id="m" onmousedown="PublishTwist(this.id)" onmouseup="MouseUp()">m</button>
+    <button id="," onmousedown="PublishTwist(this.id)" onmouseup="MouseUp()">,</button>
+    <button id="." onmousedown="PublishTwist(this.id)" onmouseup="MouseUp()">.</button>
   </div>
   <br>
   <h2>Speed</h2>
   <div class="btn-group">
-    <button id="q" onclick="PublishTwist(this.id)">q</button>
-    <button id="w" onclick="PublishTwist(this.id)">w</button>
-    <button id="e" onclick="PublishTwist(this.id)">e</button>
+    <button id="q" onmousedown="PublishTwist(this.id)">q</button>
+    <button id="w" onmousedown="PublishTwist(this.id)">w</button>
+    <button id="e" onmousedown="PublishTwist(this.id)">e</button>
   </div>
   <div class="btn-group">
-    <button id="z" onclick="PublishTwist(this.id)">z</button>
-    <button id="x" onclick="PublishTwist(this.id)">x</button>
-    <button id="c" onclick="PublishTwist(this.id)">c</button>
+    <button id="z" onmousedown="PublishTwist(this.id)">z</button>
+    <button id="x" onmousedown="PublishTwist(this.id)">x</button>
+    <button id="c" onmousedown="PublishTwist(this.id)">c</button>
   </div>
   <br>
   <div id="statusIndicator">

@@ -28,8 +28,8 @@ ros.on('close', function() {
 });
 
 // Create a connection to the rosbridge WebSocket server.
-// ros.connect('ws://localhost:9090');
-ros.connect('ws://192.168.56.101:9090');
+ros.connect('ws://localhost:9090');
+// ros.connect('ws://192.168.56.101:9090');
 
 // Publishing a Topic
 // ------------------
@@ -73,6 +73,7 @@ var target_speed = 0;
 var target_turn = 0;
 var control_speed = 0;
 var control_turn = 0;
+var intervalID;
 
 var stop = new ROSLIB.Message({
     linear : {
@@ -92,7 +93,12 @@ function sleep(ms) {
 }
 
 // Do function when clicking.
-async function PublishTwist(clicked_id) {
+function MouseDown(clicked_id) {
+
+    intervalID = setInterval(function(){PublishTwist(clicked_id);}, 500);
+}
+
+function PublishTwist(clicked_id) {
 
     if (moveBindings.has(clicked_id)){
         x = moveBindings.get(clicked_id)[0];
@@ -151,6 +157,16 @@ async function PublishTwist(clicked_id) {
         }
     });
     cmdVel.publish(twist);
-    await sleep(100);
+    // await sleep(100);
+}
+
+function MouseUp(){
+    // alert('Mouse up event occurred.');
+    clearInterval(intervalID);
+    x = 0; th = 0;
+    control_speed = 0;
+    control_turn = 0;
+    speed = 0.2;
+    turn = 1;
     cmdVel.publish(stop);
 }
