@@ -47,9 +47,15 @@ function connectHttps(){
 // ------------------
 
 // Create a Topic object with details of the topic's name and message type.
-var cmdVel = new ROSLIB.Topic({
+var r1CmdVel = new ROSLIB.Topic({
     ros : ros,
-    name : '/cmd_vel',
+    name : '/r1/cmd_vel',
+    messageType : 'geometry_msgs/Twist'
+});
+
+var r2CmdVel = new ROSLIB.Topic({
+    ros : ros,
+    name : '/r2/cmd_vel',
     messageType : 'geometry_msgs/Twist'
 });
 
@@ -160,7 +166,8 @@ function PublishTwist(clicked_id) {
             z : control_turn
         }
     });
-    cmdVel.publish(twist);
+    r1CmdVel.publish(twist);
+    r2CmdVel.publish(twist);
 }
 
 function MouseUp(){
@@ -181,5 +188,6 @@ function MouseUp(){
             z : 0
         }
     });
-    cmdVel.publish(stop);
+    r1CmdVel.publish(stop);
+    r2CmdVel.publish(stop);
 }
