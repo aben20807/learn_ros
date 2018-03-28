@@ -15,23 +15,49 @@
     <arg name="use_sim_time" value="$(arg use_sim_time)"/>
     <arg name="headless" value="$(arg headless)"/>
   </include>
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find mastering_ros_robot_description_pkg)/urdf/diff_wheeled_robot.xacro'" />
 
-  <!-- urdf xml robot description loaded on the Parameter Server-->
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find mastering_ros_robot_description_pkg)/urdf/diff_wheeled_robot.xacro'" /> 
+  <group ns="robot1">
+    <param name="tf_prefix" value="robot1"/>
 
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find mastering_ros_robot_description_pkg)/urdf/diff_wheeled_robot.xacro'" />
 
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
-  <!-- start robot state publisher -->
-  <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher" output="screen" >
+    <!-- push robot_description to factory and spawn robot in gazebo -->
+    <node name="spawn_robot1" pkg="gazebo_ros" type="spawn_model"
+          args="-param robot_description
+                -urdf
+                -unpause
+                -z 0.01
+                -model robot1
+                -ros_namespace /gazebo"
+          respawn="false" output="screen" />
+
+    <!-- start robot state publisher -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher1" output="screen" >
+      <param name="publish_frequency" type="double" value="50.0" />
+    </node>
+  </group>
+
+  <group ns="robot2">
+    <param name="tf_prefix" value="robot2"/>
+
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find mastering_ros_robot_description_pkg)/urdf/diff_wheeled_robot.xacro'" />
+
+    <!-- push robot_description to factory and spawn robot in gazebo -->
+    <node name="spawn_robot2" pkg="gazebo_ros" type="spawn_model"
+          args="-param robot_description
+                -urdf
+                -unpause
+                -x 1.00
+                -z 0.01
+                -model robot2
+                -ros_namespace /gazebo"
+          respawn="false" output="screen" />
+
+    <!-- start robot state publisher -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher2" output="screen" >
     <param name="publish_frequency" type="double" value="50.0" />
-  </node>
-
-
-  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-	args="-urdf -model diff_wheeled_robot -param robot_description"/> 
-
-
-
+    </node>
+  </group>
 
 </launch>
