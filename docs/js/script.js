@@ -103,6 +103,7 @@ var target_turn = 0;
 var control_speed = 0;
 var control_turn = 0;
 var intervalID;
+var controlRobot = "r1";
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -166,8 +167,12 @@ function PublishTwist(clicked_id) {
             z : control_turn
         }
     });
-    r1CmdVel.publish(twist);
-    r2CmdVel.publish(twist);
+    if (controlRobot == "r1" || controlRobot == "r1r2"){
+        r1CmdVel.publish(twist);
+    }
+    if (controlRobot == "r2" || controlRobot == "r1r2"){
+        r2CmdVel.publish(twist);
+    }
 }
 
 function MouseUp(){
@@ -188,6 +193,16 @@ function MouseUp(){
             z : 0
         }
     });
-    r1CmdVel.publish(stop);
-    r2CmdVel.publish(stop);
+    if (controlRobot == "r1" || controlRobot == "r1r2"){
+        r1CmdVel.publish(stop);
+    }
+    if (controlRobot == "r2" || controlRobot == "r1r2"){
+        r2CmdVel.publish(stop);
+    }
+}
+
+function changeRobot(){
+    var selRobot = document.getElementById("selRobot");
+    controlRobot = selRobot.value;
+    document.getElementById('labelRobot').innerHTML = controlRobot;
 }

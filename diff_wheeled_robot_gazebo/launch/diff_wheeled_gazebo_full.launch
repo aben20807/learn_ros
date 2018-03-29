@@ -15,12 +15,12 @@
     <arg name="use_sim_time" value="$(arg use_sim_time)"/>
     <arg name="headless" value="$(arg headless)"/>
   </include>
-    <param name="robot_description" command="$(find xacro)/xacro.py '$(find mastering_ros_robot_description_pkg)/urdf/diff_wheeled_robot.xacro'" />
 
   <group ns="robot1">
     <param name="tf_prefix" value="robot1"/>
 
-    <param name="robot_description" command="$(find xacro)/xacro.py '$(find mastering_ros_robot_description_pkg)/urdf/diff_wheeled_robot.xacro'" />
+    <param name="robot_description" command="$(find xacro)/xacro.py
+      '$(find mastering_ros_robot_description_pkg)/urdf/diff_wheeled_robot_r1.xacro'" />
 
     <!-- push robot_description to factory and spawn robot in gazebo -->
     <node name="spawn_robot1" pkg="gazebo_ros" type="spawn_model"
@@ -33,7 +33,8 @@
           respawn="false" output="screen" />
 
     <!-- start robot state publisher -->
-    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher1" output="screen" >
+    <node pkg="robot_state_publisher" type="robot_state_publisher"
+      name="robot_state_publisher1" output="screen" >
       <param name="publish_frequency" type="double" value="50.0" />
     </node>
   </group>
@@ -41,7 +42,8 @@
   <group ns="robot2">
     <param name="tf_prefix" value="robot2"/>
 
-    <param name="robot_description" command="$(find xacro)/xacro.py '$(find mastering_ros_robot_description_pkg)/urdf/diff_wheeled_robot.xacro'" />
+    <param name="robot_description" command="$(find xacro)/xacro.py
+      '$(find mastering_ros_robot_description_pkg)/urdf/diff_wheeled_robot_r2.xacro'" />
 
     <!-- push robot_description to factory and spawn robot in gazebo -->
     <node name="spawn_robot2" pkg="gazebo_ros" type="spawn_model"
@@ -55,7 +57,8 @@
           respawn="false" output="screen" />
 
     <!-- start robot state publisher -->
-    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher2" output="screen" >
+    <node pkg="robot_state_publisher" type="robot_state_publisher"
+      name="robot_state_publisher2" output="screen" >
     <param name="publish_frequency" type="double" value="50.0" />
     </node>
   </group>
