@@ -204,5 +204,15 @@ function MouseUp(){
 function changeRobot(){
     var selRobot = document.getElementById("selRobot");
     controlRobot = selRobot.value;
-    document.getElementById('labelRobot').innerHTML = controlRobot;
+    switch(controlRobot){
+        case "r1":
+            document.getElementById('labelRobot').innerHTML = "robot 1";
+            break;
+        case "r2":
+            document.getElementById('labelRobot').innerHTML = "robot 2";
+            break;
+        case "r1r2":
+            document.getElementById('labelRobot').innerHTML = "robot 1+2";
+            break;
+    }
 }
